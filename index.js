@@ -24,46 +24,10 @@ function getScore() {
 }
 
 function getResult() {
-    if (playerCompare === computerCompare) {
-        console.log("It's a TIE!");
-        getScore();
-    } else if (playerCompare === "rock") {
-        switch (computerChoice) {
-            case "Scissors":
-                console.log(`${playerChoice} beats ${computerChoice}! YOU WIN!`);
-                playerScore++;
-                getScore();
-                break;
-            case "Paper":
-                console.log(`${computerChoice} beats ${playerChoice}! YOU LOSE!`);
-                computerScore++;
-                getScore();
-        }
-    } else if (playerCompare === "paper") {
-        switch (computerChoice) {
-            case "Rock":
-                console.log(`${playerChoice} beats ${computerChoice}! YOU WIN!`);
-                playerScore++;
-                getScore();
-                break;
-            case "Scissors":
-                console.log(`${computerChoice} beats ${playerChoice}! YOU LOSE!`);
-                computerScore++;
-                getScore();
-        }
-    } else if (playerCompare === "scissors") {
-        switch (computerChoice) {
-            case "Paper":
-                console.log(`${playerChoice} beats ${computerChoice}! YOU WIN!`);
-                playerScore++;
-                getScore();
-                break;
-            case "Rock":
-                console.log(`${computerChoice} beats ${playerChoice}! YOU LOSE!`);
-                computerScore++;
-                getScore();
-        }
-    }
+    (playerCompare === computerCompare) ? tieGame()
+        : (playerCompare === "rock") ? userPlaysRock()
+            : (playerCompare === "paper") ? userPlaysPaper()
+                : userPlaysScissors();
 }
 
 function resetGame() {
@@ -95,8 +59,9 @@ function playGame() {
     playRematch();
 }
 
-function getResultTernary() {
-    (playerCompare === "rock") ? playedRock() : console.log("Test");
+function tieGame() {
+    console.log("It's a TIE!");
+    getScore();
 }
 
 function userPlaysRock() {
