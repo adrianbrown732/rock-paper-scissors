@@ -24,10 +24,10 @@ function getScore() {
 }
 
 function getResult() {
-    if (playerCompare === computerCompare) { // Tie
+    if (playerCompare === computerCompare) {
         console.log("It's a TIE!");
         getScore();
-    } else if (playerCompare === "rock") { // Rock
+    } else if (playerCompare === "rock") {
         switch (computerChoice) {
             case "Scissors":
                 console.log(`${playerChoice} beats ${computerChoice}! YOU WIN!`);
@@ -39,7 +39,7 @@ function getResult() {
                 computerScore++;
                 getScore();
         }
-    } else if (playerCompare === "paper") { // Paper
+    } else if (playerCompare === "paper") {
         switch (computerChoice) {
             case "Rock":
                 console.log(`${playerChoice} beats ${computerChoice}! YOU WIN!`);
@@ -51,7 +51,7 @@ function getResult() {
                 computerScore++;
                 getScore();
         }
-    } else if (playerCompare === "scissors") { // Scissors
+    } else if (playerCompare === "scissors") {
         switch (computerChoice) {
             case "Paper":
                 console.log(`${playerChoice} beats ${computerChoice}! YOU WIN!`);
@@ -66,11 +66,25 @@ function getResult() {
     }
 }
 
+function resetGame() {
+    playerScore = 0;
+    computerScore = 0;
+}
+
 function playGame() {
-    while (playerScore !== 5 && computerScore !== 5) {
+    let winningScore = parseInt(prompt("Enter winning score: "));
+    function playRematch() {
+        let rematchPrompt = prompt("Play again? (y/n): ");
+        let yes = 'y';
+        (rematchPrompt === yes) ? playGame() : console.log("Thanks For Playing!");
+    }
+    while (playerScore !== winningScore && computerScore !== winningScore) {
         getComputerChoice();
         getPlayerChoice();
         getResult();
     }
     console.log('GAME OVER');
+    resetGame();
+    winningScore = 0;
+    playRematch();
 }
