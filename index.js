@@ -1,10 +1,10 @@
 const rockPaperSci = ["Rock", "Paper", "Scissors"];
-function randomNum() {
-    return Math.floor(Math.random() * 3);
-}
-let compIndex = randomNum();
-let compChoice = rockPaperSci[compIndex];
 let userInput = prompt("Rock, Paper, Scissors...SHOOT: ");
+
+function getComputerChoice() {
+    let compIndex = Math.floor(Math.random() * 3);
+    return rockPaperSci[compIndex];
+}
 
 if (userInput === rockPaperSci[compIndex]) { // Tie
     console.log(`${compChoice}! TIE!`);
