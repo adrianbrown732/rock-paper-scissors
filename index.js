@@ -1,44 +1,48 @@
 const rockPaperSci = ["Rock", "Paper", "Scissors"];
 let computerChoice = "";
+let computerCompare = "";
 let playerChoice = "";
+let playerCompare = "";
 
 function getComputerChoice() {
     let compIndex = Math.floor(Math.random() * 3);
     computerChoice = rockPaperSci[compIndex];
+    computerCompare = computerChoice.toLowerCase();
     return computerChoice;
 }
 
 function getPlayerChoice() {
     playerChoice = prompt("Rock, Paper, Scissors...SHOOT: ");
+    playerCompare = playerChoice.toLowerCase();
     return playerChoice;
 }
 
 function getResult() {
-    if (userInput === rockPaperSci[compIndex]) { // Tie
-        console.log(`${compChoice}! TIE!`);
-    } else if (userInput === "Rock") { // Rock
-        switch (compChoice) {
+    if (playerCompare === computerCompare) { // Tie
+        console.log("It's a TIE!");
+    } else if (playerCompare === "rock") { // Rock
+        switch (computerChoice) {
             case "Scissors":
-                console.log(`${userInput} beats ${compChoice}! YOU WIN!`);
+                console.log(`${playerChoice} beats ${computerChoice}! YOU WIN!`);
                 break;
             case "Paper":
-                console.log(`${compChoice} beats ${userInput}! YOU LOSE!`);
+                console.log(`${computerChoice} beats ${playerChoice}! YOU LOSE!`);
         }
-    } else if (userInput === "Paper") { // Paper
-        switch (compChoice) {
+    } else if (playerCompare === "paper") { // Paper
+        switch (computerChoice) {
             case "Rock":
-                console.log(`${userInput} beats ${compChoice}! YOU WIN!`);
+                console.log(`${playerChoice} beats ${computerChoice}! YOU WIN!`);
                 break;
             case "Scissors":
-                console.log(`${compChoice} beats ${userInput}! YOU LOSE!`);
+                console.log(`${computerChoice} beats ${playerChoice}! YOU LOSE!`);
         }
-    } else if (userInput === "Scissors") { // Scissors
-        switch (compChoice) {
+    } else if (playerCompare === "scissors") { // Scissors
+        switch (computerChoice) {
             case "Paper":
-                console.log(`${userInput} beats ${compChoice}! YOU WIN!`);
+                console.log(`${playerChoice} beats ${computerChoice}! YOU WIN!`);
                 break;
             case "Rock":
-                console.log(`${compChoice} beats ${userInput}! YOU LOSE!`);
+                console.log(`${computerChoice} beats ${playerChoice}! YOU LOSE!`);
         }
     }
 }
