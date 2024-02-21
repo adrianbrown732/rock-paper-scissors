@@ -99,7 +99,7 @@ function getResultTernary() {
     (playerCompare === "rock") ? playedRock() : console.log("Test");
 }
 
-function playedRock() {
+function userPlaysRock() {
     switch (computerChoice) {
         case "Scissors":
             console.log(`${playerChoice} beats ${computerChoice}! YOU WIN!`);
@@ -111,4 +111,19 @@ function playedRock() {
             computerScore++;
             getScore();
     }
+}
+
+function userPlaysPaper() {
+    switch (computerChoice) {
+        case "Rock":
+            console.log(`${playerChoice} beats ${computerChoice}! YOU WIN!`);
+            playerScore++;
+            getScore();
+            break;
+        case "Scissors":
+            console.log(`${computerChoice} beats ${playerChoice}! YOU LOSE!`);
+            computerScore++;
+            getScore();
+    }
+
 }
