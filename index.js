@@ -18,9 +18,11 @@ function getPlayerChoice() {
   playerCompare = playerChoice.toLowerCase();
 
   function invalidResult() {
-    console.log(`${playerChoice} is invalid. Please enter 'Rock', 'Paper', or 'Scissors'`);
+    console.log(
+      `${playerChoice} is invalid. Please enter 'Rock', 'Paper', or 'Scissors'`
+    );
   }
-  
+
   while (
     playerCompare !== "rock" &&
     playerCompare !== "paper" &&
@@ -93,13 +95,12 @@ function getScore() {
   console.log(`PLAYER: ${playerScore} COMPUTER: ${computerScore}`);
 }
 
-function resetGame() {
-  playerScore = 0;
-  computerScore = 0;
-}
-
 function playGame() {
   let winningScore = parseInt(prompt("Enter winning score: "));
+  while (!Number.isInteger(winningScore)) {
+    winningScore = parseInt(prompt("Enter winning score: "));
+  }
+  
   function playRematch() {
     let askToPlayAgain = "";
     let yes = "y";
@@ -111,6 +112,12 @@ function playGame() {
     askToPlayAgain === yes ? playGame() : console.log("Thanks For Playing!");
   }
 
+  function resetGame() {
+    playerScore = 0;
+    computerScore = 0;
+    winningScore = 0;
+  }
+
   while (playerScore !== winningScore && computerScore !== winningScore) {
     getComputerChoice();
     getPlayerChoice();
@@ -118,6 +125,5 @@ function playGame() {
   }
   console.log("GAME OVER");
   resetGame();
-  winningScore = 0;
   playRematch();
 }
