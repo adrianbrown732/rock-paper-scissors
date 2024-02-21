@@ -1,4 +1,4 @@
-const rockPaperSci = ["Rock", "Paper", "Scissors"];
+const rockPaperScissors = ["Rock", "Paper", "Scissors"];
 let computerChoice = "";
 let computerCompare = "";
 let playerChoice = "";
@@ -8,7 +8,7 @@ let computerScore = 0;
 
 function getComputerChoice() {
     let compIndex = Math.floor(Math.random() * 3);
-    computerChoice = rockPaperSci[compIndex];
+    computerChoice = rockPaperScissors[compIndex];
     computerCompare = computerChoice.toLowerCase();
     return computerChoice;
 }
@@ -74,10 +74,16 @@ function resetGame() {
 function playGame() {
     let winningScore = parseInt(prompt("Enter winning score: "));
     function playRematch() {
-        let rematchPrompt = prompt("Play again? (y/n): ");
+        let askToPlayAgain = "";
         let yes = 'y';
-        (rematchPrompt === yes) ? playGame() : console.log("Thanks For Playing!");
+        let no = 'n';
+
+        while (askToPlayAgain !== yes && askToPlayAgain !== no) {
+            askToPlayAgain = prompt("Play again? (y/n): ").toLowerCase();
+        }
+        (askToPlayAgain === yes) ? playGame() : console.log("Thanks For Playing!");
     }
+
     while (playerScore !== winningScore && computerScore !== winningScore) {
         getComputerChoice();
         getPlayerChoice();
