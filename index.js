@@ -65,3 +65,12 @@ function getResult() {
         }
     }
 }
+
+function playGame() {
+    while (playerScore !== 5 && computerScore !== 5) {
+        getComputerChoice();
+        getPlayerChoice();
+        getResult();
+    }
+    console.log('GAME OVER');
+}
