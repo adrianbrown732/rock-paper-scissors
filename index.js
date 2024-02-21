@@ -1,13 +1,16 @@
 const rockPaperSci = ["Rock", "Paper", "Scissors"];
+let computerChoice = "";
+let playerChoice = "";
 
 function getComputerChoice() {
     let compIndex = Math.floor(Math.random() * 3);
-    return rockPaperSci[compIndex];
+    computerChoice = rockPaperSci[compIndex];
+    return computerChoice;
 }
 
 function getPlayerChoice() {
-    let userInput = prompt("Rock, Paper, Scissors...SHOOT: ");
-    return userInput;
+    playerChoice = prompt("Rock, Paper, Scissors...SHOOT: ");
+    return playerChoice;
 }
 
 function getResult() {
