@@ -6,9 +6,9 @@ let compIndex = randomNum();
 let compChoice = rockPaperSci[compIndex];
 let userInput = prompt("Rock, Paper, Scissors...SHOOT: ");
 
-if (userInput === rockPaperSci[compIndex]) {
+if (userInput === rockPaperSci[compIndex]) { // Tie
     console.log(`${compChoice}! TIE!`);
-} else if (userInput === "Rock") {
+} else if (userInput === "Rock") { // Rock
     switch (compChoice) {
         case "Scissors":
             console.log(`${compChoice}! YOU WIN!`);
@@ -16,7 +16,7 @@ if (userInput === rockPaperSci[compIndex]) {
         case "Paper":
             console.log(`${compChoice}! YOU LOSE!`);
     }
-} else if (userInput === "Paper") {
+} else if (userInput === "Paper") { // Paper
     switch (compChoice) {
         case "Rock":
             console.log(`${compChoice}! YOU WIN!`);
@@ -24,7 +24,7 @@ if (userInput === rockPaperSci[compIndex]) {
         case "Scissors":
             console.log(`${compChoice}! YOU LOSE!`);
     }
-} else if (userInput === "Scissors") {
+} else if (userInput === "Scissors") { // Scissors
     switch (compChoice) {
         case "Paper":
             console.log(`${compChoice}! YOU WIN!`);
