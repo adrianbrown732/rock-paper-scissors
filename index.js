@@ -94,3 +94,21 @@ function playGame() {
     winningScore = 0;
     playRematch();
 }
+
+function getResultTernary() {
+    (playerCompare === "rock") ? playedRock() : console.log("Test");
+}
+
+function playedRock() {
+    switch (computerChoice) {
+        case "Scissors":
+            console.log(`${playerChoice} beats ${computerChoice}! YOU WIN!`);
+            playerScore++;
+            getScore();
+            break;
+        case "Paper":
+            console.log(`${computerChoice} beats ${playerChoice}! YOU LOSE!`);
+            computerScore++;
+            getScore();
+    }
+}
