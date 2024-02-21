@@ -125,5 +125,18 @@ function userPlaysPaper() {
             computerScore++;
             getScore();
     }
+}
 
+function userPlaysScissors() {
+    switch (computerChoice) {
+        case "Paper":
+            console.log(`${playerChoice} beats ${computerChoice}! YOU WIN!`);
+            playerScore++;
+            getScore();
+            break;
+        case "Rock":
+            console.log(`${computerChoice} beats ${playerChoice}! YOU LOSE!`);
+            computerScore++;
+            getScore();
+    }
 }
