@@ -105,25 +105,33 @@ function getScore() {
   console.log(`PLAYER: ${playerScore} COMPUTER: ${computerScore}`);
 }
 
+function resetGame() {
+  playerScore = 0;
+  computerScore = 0;
+  winningScore = 0;
+}
+
+function askForRematch() {
+  let askToPlayAgain = "";
+  let yes = "y";
+  let no = "n";
+  let playAgain = "Play again? (y/n): ";
+  
+
+  while (askToPlayAgain !== yes && askToPlayAgain !== no) {
+    askToPlayAgain = prompt(playAgain.toLowerCase());
+  }
+  askToPlayAgain === yes ? playGame() : endGame();
+}
+
+function endGame() {
+  let gameEndMessage = "Thanks For Playing!";
+  return console.log(gameEndMessage);
+}
+
 function playGame() {
   winningScore = setGameScore();
 
-  function playRematch() {
-    let askToPlayAgain = "";
-    let yes = "y";
-    let no = "n";
-
-    while (askToPlayAgain !== yes && askToPlayAgain !== no) {
-      askToPlayAgain = prompt("Play again? (y/n): ").toLowerCase();
-    }
-    askToPlayAgain === yes ? playGame() : console.log("Thanks For Playing!");
-  }
-
-  function resetGame() {
-    playerScore = 0;
-    computerScore = 0;
-    winningScore = 0;
-  }
   do {
     getComputerChoice();
     getPlayerChoice();
@@ -131,5 +139,5 @@ function playGame() {
   } while (playerScore !== winningScore && computerScore !== winningScore);
   console.log("GAME OVER");
   resetGame();
-  playRematch();
+  askForRematch();
 }
