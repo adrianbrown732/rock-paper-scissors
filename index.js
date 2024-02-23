@@ -79,12 +79,12 @@ function userPlaysPaper() {
 
 function userPlaysScissors() {
   switch (computerChoice) {
-    case "Paper":
+    case rockPaperScissors[1]:
       console.log(`${playerChoice} beats ${computerChoice}! YOU WIN!`);
       playerScore++;
       getScore();
       break;
-    case "Rock":
+    case rockPaperScissors[0]:
       console.log(`${computerChoice} beats ${playerChoice}! YOU LOSE!`);
       computerScore++;
       getScore();
@@ -95,6 +95,7 @@ function getResult() {
   let compareTie = playerCompare === computerCompare;
   let compareRock = playerCompare === "rock";
   let comparePaper = playerCompare === "paper";
+
   compareTie
     ? tieGame()
     : compareRock
