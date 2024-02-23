@@ -5,14 +5,14 @@ let playerChoice = "";
 let playerCompare = "";
 let playerScore = 0;
 let computerScore = 0;
-let winningScore;
+let winningScore = 0;
 
 function setGameScore() {
   let invalidScore = 0;
   let gameScore;
   do {
     gameScore = parseInt(prompt("Enter winning score: "));
-  } while (gameScore <= invalidScore || !Number.isInteger(gameScore)); 
+  } while (gameScore <= invalidScore || !Number.isInteger(gameScore));
   return gameScore;
 }
 
@@ -92,11 +92,14 @@ function userPlaysScissors() {
 }
 
 function getResult() {
-  playerCompare === computerCompare
+  let compareTie = playerCompare === computerCompare;
+  let compareRock = playerCompare === "rock";
+  let comparePaper = playerCompare === "paper";
+  compareTie
     ? tieGame()
-    : playerCompare === "rock"
+    : compareRock
     ? userPlaysRock()
-    : playerCompare === "paper"
+    : comparePaper
     ? userPlaysPaper()
     : userPlaysScissors();
 }
@@ -116,7 +119,6 @@ function askForRematch() {
   let yes = "y";
   let no = "n";
   let playAgain = "Play again? (y/n): ";
-  
 
   while (askToPlayAgain !== yes && askToPlayAgain !== no) {
     askToPlayAgain = prompt(playAgain.toLowerCase());
