@@ -51,12 +51,12 @@ function tieGame() {
 
 function userPlaysRock() {
   switch (computerChoice) {
-    case "Scissors":
+    case rockPaperScissors[2]:
       console.log(`${playerChoice} beats ${computerChoice}! YOU WIN!`);
       playerScore++;
       getScore();
       break;
-    case "Paper":
+    case rockPaperScissors[1]:
       console.log(`${computerChoice} beats ${playerChoice}! YOU LOSE!`);
       computerScore++;
       getScore();
