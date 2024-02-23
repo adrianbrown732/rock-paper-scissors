@@ -5,6 +5,16 @@ let playerChoice = "";
 let playerCompare = "";
 let playerScore = 0;
 let computerScore = 0;
+let winningScore;
+
+function setGameScore() {
+  let invalidScore = 0;
+  let gameScore;
+  do {
+    gameScore = parseInt(prompt("Enter winning score: "));
+  } while (gameScore <= invalidScore || !Number.isInteger(gameScore)); 
+  return gameScore;
+}
 
 function getComputerChoice() {
   let compIndex = Math.floor(Math.random() * 3);
@@ -96,11 +106,8 @@ function getScore() {
 }
 
 function playGame() {
-  let winningScore = parseInt(prompt("Enter winning score: "));
-  while (!Number.isInteger(winningScore)) {
-    winningScore = parseInt(prompt("Enter winning score: "));
-  }
-  
+  winningScore = setGameScore();
+
   function playRematch() {
     let askToPlayAgain = "";
     let yes = "y";
@@ -117,12 +124,11 @@ function playGame() {
     computerScore = 0;
     winningScore = 0;
   }
-
-  while (playerScore !== winningScore && computerScore !== winningScore) {
+  do {
     getComputerChoice();
     getPlayerChoice();
     getResult();
-  }
+  } while (playerScore !== winningScore && computerScore !== winningScore);
   console.log("GAME OVER");
   resetGame();
   playRematch();
