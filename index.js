@@ -65,12 +65,12 @@ function userPlaysRock() {
 
 function userPlaysPaper() {
   switch (computerChoice) {
-    case "Rock":
+    case rockPaperScissors[0]:
       console.log(`${playerChoice} beats ${computerChoice}! YOU WIN!`);
       playerScore++;
       getScore();
       break;
-    case "Scissors":
+    case rockPaperScissors[2]:
       console.log(`${computerChoice} beats ${playerChoice}! YOU LOSE!`);
       computerScore++;
       getScore();
