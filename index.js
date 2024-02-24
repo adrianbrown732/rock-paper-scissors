@@ -1,4 +1,3 @@
-const rockPaperScissors = ["Rock", "Paper", "Scissors"];
 let computerChoice = "";
 let computerCompare = "";
 let playerChoice = "";
@@ -6,12 +5,26 @@ let playerCompare = "";
 let playerScore = 0;
 let computerScore = 0;
 let winningScore = 0;
+let playerWins = false;
 
+const rockPaperScissors = ["Rock", "Paper", "Scissors"];
+const youWin = () =>
+  console.log(`${playerChoice} beats ${computerChoice}! YOU WIN!`);
+const youLose = () =>
+  console.log(`${computerChoice} beats ${playerChoice}! YOU LOSE!`);
+function endMatch(){
+  console.log("MATCH OVER");
+playerWins ? console.log("YOU WIN!") : console.log("YOU LOSE!")
+} 
+function endGame() {
+  console.log("GAME OVER");
+  console.log("Thanks For Playing!");
+}
 function setGameScore() {
   let invalidScore = 0;
   let gameScore;
   do {
-    gameScore = parseInt(prompt("Enter winning score: "));
+    gameScore = parseInt(prompt("First player to (enter number) wins!"));
   } while (gameScore <= invalidScore || !Number.isInteger(gameScore));
   return gameScore;
 }
@@ -27,10 +40,9 @@ function getPlayerChoice() {
   playerChoice = prompt("Rock, Paper, Scissors...SHOOT: ");
   playerCompare = playerChoice.toLowerCase();
 
-  function invalidResult() {
-    console.log(
-      `${playerChoice} is invalid. Please enter 'Rock', 'Paper', or 'Scissors'`
-    );
+  function invalidInput() {
+    const invalidMessage = `${playerChoice} is invalid. Please enter 'Rock', 'Paper', or 'Scissors'`;
+    console.log(invalidMessage);
   }
 
   while (
@@ -38,7 +50,7 @@ function getPlayerChoice() {
     playerCompare !== "paper" &&
     playerCompare !== "scissors"
   ) {
-    invalidResult();
+    invalidInput();
     getPlayerChoice();
   }
   return playerChoice;
@@ -52,12 +64,12 @@ function tieGame() {
 function userPlaysRock() {
   switch (computerChoice) {
     case rockPaperScissors[2]:
-      console.log(`${playerChoice} beats ${computerChoice}! YOU WIN!`);
+      youWin();
       playerScore++;
       getScore();
       break;
     case rockPaperScissors[1]:
-      console.log(`${computerChoice} beats ${playerChoice}! YOU LOSE!`);
+      youLose();
       computerScore++;
       getScore();
   }
@@ -66,12 +78,12 @@ function userPlaysRock() {
 function userPlaysPaper() {
   switch (computerChoice) {
     case rockPaperScissors[0]:
-      console.log(`${playerChoice} beats ${computerChoice}! YOU WIN!`);
+      youWin();
       playerScore++;
       getScore();
       break;
     case rockPaperScissors[2]:
-      console.log(`${computerChoice} beats ${playerChoice}! YOU LOSE!`);
+      youLose();
       computerScore++;
       getScore();
   }
@@ -80,12 +92,12 @@ function userPlaysPaper() {
 function userPlaysScissors() {
   switch (computerChoice) {
     case rockPaperScissors[1]:
-      console.log(`${playerChoice} beats ${computerChoice}! YOU WIN!`);
+      youWin();
       playerScore++;
       getScore();
       break;
     case rockPaperScissors[0]:
-      console.log(`${computerChoice} beats ${playerChoice}! YOU LOSE!`);
+      youLose();
       computerScore++;
       getScore();
   }
@@ -109,10 +121,15 @@ function getScore() {
   console.log(`PLAYER: ${playerScore} COMPUTER: ${computerScore}`);
 }
 
+function didPlayerWin() {
+  playerScore > computerScore ? playerWins = true : playerWins = false;
+}
+
 function resetGame() {
   playerScore = 0;
   computerScore = 0;
   winningScore = 0;
+  playerWins = false;
 }
 
 function askForRematch() {
@@ -127,20 +144,16 @@ function askForRematch() {
   askToPlayAgain === yes ? playGame() : endGame();
 }
 
-function endGame() {
-  let gameEndMessage = "Thanks For Playing!";
-  return console.log(gameEndMessage);
-}
-
 function playGame() {
+  alert('WELCOME TO ROCK, PAPER, SCISSORS!!');
   winningScore = setGameScore();
-
   do {
     getComputerChoice();
     getPlayerChoice();
     getResult();
   } while (playerScore !== winningScore && computerScore !== winningScore);
-  console.log("GAME OVER");
+  didPlayerWin();
+  endMatch();
   resetGame();
   askForRematch();
 }
