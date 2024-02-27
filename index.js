@@ -1,77 +1,72 @@
 let computerChoice = "";
-let computerCompare = "";
 let playerChoice = "";
-let playerCompare = "";
 let playerScore = 0;
 let computerScore = 0;
-let winningScore = 0;
-let playerWins = false;
+let winningScore = 5;
 
 const rockPaperScissors = ["Rock", "Paper", "Scissors"];
+const rockButton = document.querySelector("#rock");
+const paperButton = document.querySelector("#paper");
+const scissorsButton = document.querySelector("#scissors");
+const resetButton = document.querySelector("#reset");
+const results = document.querySelector(".results");
+const playerScoreDisplay = document.querySelector("#player-score");
+const computerScoreDisplay = document.querySelector("#computer-score");
+const resetDisplay = () => {
+  playerScoreDisplay.textContent = 0;
+  computerScoreDisplay.textContent = 0;
+  results.textContent = "";
+};
 const youWin = () =>
-  console.log(`${playerChoice} beats ${computerChoice}! YOU WIN!`);
+  (results.textContent = `${playerChoice} beats ${computerChoice}!`);
 const youLose = () =>
-  console.log(`${computerChoice} beats ${playerChoice}! YOU LOSE!`);
-function endMatch() {
-  console.log("MATCH OVER");
-  playerWins ? console.log("YOU WIN!") : console.log("YOU LOSE!");
-}
-function endGame() {
-  console.log("GAME OVER");
-  console.log("Thanks For Playing!");
-}
-function setGameScore() {
-  let invalidScore = 0;
-  let gameScore;
-  do {
-    gameScore = parseInt(prompt("First player to (enter number) wins!"));
-  } while (gameScore <= invalidScore || !Number.isInteger(gameScore));
-  return gameScore;
+  (results.textContent = `${computerChoice} beats ${playerChoice}!`);
+
+rockButton.addEventListener("click", () => {
+  playerChoice = "Rock";
+  playRound();
+});
+paperButton.addEventListener("click", () => {
+  playerChoice = "Paper";
+  playRound();
+});
+scissorsButton.addEventListener("click", () => {
+  playerChoice = "Scissors";
+  playRound();
+});
+resetButton.addEventListener("click", resetGame);
+
+function playRound() {
+  getComputerChoice();
+  playerChoice === computerChoice
+    ? tieGame()
+    : playerChoice === "Rock"
+    ? userPlaysRock()
+    : playerChoice === "Paper"
+    ? userPlaysPaper()
+    : userPlaysScissors();
+  checkWinner();
 }
 
 function getComputerChoice() {
   let compIndex = Math.floor(Math.random() * 3);
   computerChoice = rockPaperScissors[compIndex];
-  computerCompare = computerChoice.toLowerCase();
   return computerChoice;
 }
 
-function getPlayerChoice() {
-  playerChoice = prompt("Rock, Paper, Scissors...SHOOT: ");
-  playerCompare = playerChoice.toLowerCase();
-
-  function invalidInput() {
-    const invalidMessage = `${playerChoice} is invalid. Please enter 'Rock', 'Paper', or 'Scissors'`;
-    console.log(invalidMessage);
-  }
-
-  while (
-    playerCompare !== "rock" &&
-    playerCompare !== "paper" &&
-    playerCompare !== "scissors"
-  ) {
-    invalidInput();
-    getPlayerChoice();
-  }
-  return playerChoice;
-}
-
 function tieGame() {
-  console.log("It's a TIE!");
-  getScore();
+  results.textContent = "TIE";
 }
 
 function userPlaysRock() {
   switch (computerChoice) {
     case rockPaperScissors[2]:
       youWin();
-      playerScore++;
-      getScore();
+      addPlayerScore();
       break;
     case rockPaperScissors[1]:
       youLose();
-      computerScore++;
-      getScore();
+      addComputerScore();
   }
 }
 
@@ -79,13 +74,11 @@ function userPlaysPaper() {
   switch (computerChoice) {
     case rockPaperScissors[0]:
       youWin();
-      playerScore++;
-      getScore();
+      addPlayerScore();
       break;
     case rockPaperScissors[2]:
       youLose();
-      computerScore++;
-      getScore();
+      addComputerScore();
   }
 }
 
@@ -93,67 +86,40 @@ function userPlaysScissors() {
   switch (computerChoice) {
     case rockPaperScissors[1]:
       youWin();
-      playerScore++;
-      getScore();
+      addPlayerScore();
       break;
     case rockPaperScissors[0]:
       youLose();
-      computerScore++;
-      getScore();
+      addComputerScore();
   }
 }
 
-function getResult() {
-  let compareTie = playerCompare === computerCompare;
-  let compareRock = playerCompare === "rock";
-  let comparePaper = playerCompare === "paper";
-
-  compareTie
-    ? tieGame()
-    : compareRock
-    ? userPlaysRock()
-    : comparePaper
-    ? userPlaysPaper()
-    : userPlaysScissors();
+function addPlayerScore() {
+  playerScore++;
+  playerScoreDisplay.textContent = playerScore;
 }
 
-function getScore() {
-  console.log(`PLAYER: ${playerScore} COMPUTER: ${computerScore}`);
+function addComputerScore() {
+  computerScore++;
+  computerScoreDisplay.textContent = computerScore;
 }
 
-function didPlayerWin() {
-  playerScore > computerScore ? (playerWins = true) : (playerWins = false);
+function checkWinner() {
+  playerScore === winningScore
+    ? endGame("player")
+    : computerScore === winningScore
+    ? endGame("computer")
+    : null;
+}
+
+function endGame(winner) {
+  let para = document.createElement("p");
+  para.textContent = `${winner.toUpperCase()} WINS`;
+  results.appendChild(para);
 }
 
 function resetGame() {
   playerScore = 0;
   computerScore = 0;
-  winningScore = 0;
-  playerWins = false;
-}
-
-function askForRematch() {
-  let askToPlayAgain = "";
-  let yes = "y";
-  let no = "n";
-  let playAgain = "Play again? (y/n): ";
-
-  while (askToPlayAgain !== yes && askToPlayAgain !== no) {
-    askToPlayAgain = prompt(playAgain.toLowerCase());
-  }
-  askToPlayAgain === yes ? playGame() : endGame();
-}
-
-function playGame() {
-  alert("WELCOME TO ROCK, PAPER, SCISSORS!!");
-  winningScore = setGameScore();
-  do {
-    getComputerChoice();
-    getPlayerChoice();
-    getResult();
-  } while (playerScore !== winningScore && computerScore !== winningScore);
-  didPlayerWin();
-  endMatch();
-  resetGame();
-  askForRematch();
+  resetDisplay();
 }
