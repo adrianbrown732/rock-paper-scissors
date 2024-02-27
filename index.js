@@ -12,10 +12,10 @@ const youWin = () =>
   console.log(`${playerChoice} beats ${computerChoice}! YOU WIN!`);
 const youLose = () =>
   console.log(`${computerChoice} beats ${playerChoice}! YOU LOSE!`);
-function endMatch(){
+function endMatch() {
   console.log("MATCH OVER");
-playerWins ? console.log("YOU WIN!") : console.log("YOU LOSE!")
-} 
+  playerWins ? console.log("YOU WIN!") : console.log("YOU LOSE!");
+}
 function endGame() {
   console.log("GAME OVER");
   console.log("Thanks For Playing!");
@@ -122,7 +122,7 @@ function getScore() {
 }
 
 function didPlayerWin() {
-  playerScore > computerScore ? playerWins = true : playerWins = false;
+  playerScore > computerScore ? (playerWins = true) : (playerWins = false);
 }
 
 function resetGame() {
@@ -145,7 +145,7 @@ function askForRematch() {
 }
 
 function playGame() {
-  alert('WELCOME TO ROCK, PAPER, SCISSORS!!');
+  alert("WELCOME TO ROCK, PAPER, SCISSORS!!");
   winningScore = setGameScore();
   do {
     getComputerChoice();
